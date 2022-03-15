@@ -1,35 +1,35 @@
-[project]
-name = "ds-template"
-version = "2022.0.0"
-requires-python = ">=3.10"
+# [project]
+# name = "ds-template"
+# version = "2022.0.0"
+# requires-python = ">=3.10"
 
-description = "Template Project - Data Science"
-readme = "README.md"
-license = {file = "LICENSE"}
+# description = "Template Project - Data Science"
+# readme = "README.md"
+# license = {file = "LICENSE"}
 
-authors = [
-  {name = "Anthony Caliani", email = "https://github.com/avcaliani"},
-  {name = "Altiéris Peixoto", email = "https://github.com/altierispeixoto"}
-]
+# authors = [
+#   {name = "Anthony Caliani", email = "https://github.com/avcaliani"},
+#   {name = "Altiéris Peixoto", email = "https://github.com/altierispeixoto"}
+# ]
 
-classifiers = [
-    "Development Status :: 4 - Beta",
-    "Topic :: Utilities",
-    "Programming Language :: Python",
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3 :: Only",
-    "Environment :: Console",
-    "Intended Audience :: Developers",
-    "License :: OSI Approved :: MIT License",
-    "Operating System :: POSIX :: Linux",
-    "Operating System :: Unix",
-    "Operating System :: MacOS",
-    "Operating System :: Microsoft :: Windows"
-]
+# classifiers = [
+#     "Development Status :: 4 - Beta",
+#     "Topic :: Utilities",
+#     "Programming Language :: Python",
+#     "Programming Language :: Python :: 3",
+#     "Programming Language :: Python :: 3 :: Only",
+#     "Environment :: Console",
+#     "Intended Audience :: Developers",
+#     "License :: OSI Approved :: MIT License",
+#     "Operating System :: POSIX :: Linux",
+#     "Operating System :: Unix",
+#     "Operating System :: MacOS",
+#     "Operating System :: Microsoft :: Windows"
+# ]
 
-[project.urls]
-documentation = "https://pyscaffoldext-custom-extension.readthedocs.io/"
-source = "https://github.com/pyscaffold/pyscaffoldext-custom-extension/"
+# [project.urls]
+# documentation = "https://pyscaffoldext-custom-extension.readthedocs.io/"
+# source = "https://github.com/pyscaffold/pyscaffoldext-custom-extension/"
 
 
 [build-system]

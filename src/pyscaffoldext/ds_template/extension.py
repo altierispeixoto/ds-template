@@ -1,4 +1,5 @@
 """Main logic to create custom extensions"""
+import stat
 from functools import partial, reduce
 from typing import List
 
@@ -10,6 +11,7 @@ from pyscaffold.extensions.cirrus import Cirrus
 from pyscaffold.extensions.namespace import Namespace
 from pyscaffold.extensions.no_skeleton import NoSkeleton
 from pyscaffold.extensions.pre_commit import PreCommit
+from pyscaffold.operations import add_permissions, no_overwrite, skip_on_update
 from pyscaffold.log import logger
 from pyscaffold.operations import no_overwrite
 from pyscaffold.structure import (
@@ -118,28 +120,30 @@ def process_options(struct: Structure, opts: ScaffoldOpts) -> ActionParams:
 def add_files(struct: Structure, opts: ScaffoldOpts) -> ActionParams:
     """Add custom extension files. See :obj:`pyscaffold.actions.Action`"""
 
+    gitignore_all = (template("gitignore_all"), NO_OVERWRITE)
+
     files: Structure = {
-        ".github": {
-            "workflows": {
-                "publish-package.yml": (template("publish_package"), NO_OVERWRITE)
-            }
-        },
-        "README.rst": (template("readme"), NO_OVERWRITE),
+     
+        "README.md": (template("readme_md"), NO_OVERWRITE),
         "CONTRIBUTING.rst": (template("contributing"), NO_OVERWRITE),
         "setup.cfg": modify_setupcfg(struct["setup.cfg"], opts),
+        "data": {
+            ".gitignore": (template("gitignore_data"), NO_OVERWRITE),
+            **{
+                folder: {".gitignore": gitignore_all}
+                for folder in ("external", "preprocessed", "raw")
+            },
+        },
         "src": {
             opts["package"]: {
                 f"{EXTENSION_FILE_NAME}.py": (template("extension"), NO_OVERWRITE)
             }
         },
+        "notebooks": {"template.ipynb": (template("template_ipynb"), NO_OVERWRITE)},
         "tests": {
             "__init__.py": ("", NO_OVERWRITE),
             "conftest.py": (template("conftest"), NO_OVERWRITE),
             "helpers.py": (template("helpers"), NO_OVERWRITE),
-            "test_custom_extension.py": (
-                template("test_custom_extension"),
-                NO_OVERWRITE,
-            ),
         },
     }
 
