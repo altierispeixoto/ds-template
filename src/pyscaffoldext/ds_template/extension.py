@@ -83,7 +83,7 @@ class CustomExtension(Extension):
             self.flag,
             help=self.help_text,
             nargs=0,
-            action=include(Namespace(),NoTox() PreCommit(), self),
+            action=include(Namespace(),NoTox(), PreCommit(), self),
         )
         return self
 
