@@ -1,0 +1,43 @@
+from datetime import datetime, timedelta
+
+from airflow import DAG
+from airflow.operators.dummy import DummyOperator
+from airflow.operators.python import PythonOperator
+from airflow.operators.bash import BashOperator
+
+import my_module
+
+ARGS = {
+    'owner': 'My Team',
+    'description': 'Hello World Pipeline',
+    'depends_on_past': False,
+    'start_date': datetime(2021, 1, 1),
+    'email': ['my.team@airflow.com'],
+    'email_on_failure': False,
+    'email_on_retry': False,
+    'retries': 1,
+    'retry_delay': timedelta(minutes=5),
+}
+
+with DAG('dag_hello_world', default_args=ARGS, catchup=False, schedule_interval='@once') as dag:
+    start = DummyOperator(
+        task_id='start'
+    )
+    """
+    Just an reminder...
+    Python Operators should be used for simple actions, 
+    it's not advisable to use them for heavy processes. 
+    """
+    say_helo = PythonOperator(
+        task_id='app-processing',
+        python_callable=my_module.say_hello,
+        provide_context=True,
+    )
+    when = BashOperator(
+        task_id='when',
+        bash_command='echo "Execution Date: {{ dag_run.conf.get("exec_date") or ds }}"'
+    )
+    end = DummyOperator(
+        task_id='end'
+    )
+    start >> say_helo >> when >> end
