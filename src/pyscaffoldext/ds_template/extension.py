@@ -139,6 +139,7 @@ def add_files(struct: Structure, opts: ScaffoldOpts) -> ActionParams:
             }
         },
         "notebooks": {"template.ipynb": (template("template_ipynb"), NO_OVERWRITE)},
+        "dags": {"my_dag.py": (template("my_dag"), NO_OVERWRITE)},
         "tests": {
             "__init__.py": ("", NO_OVERWRITE),
             "conftest.py": (template("conftest"), NO_OVERWRITE),
