@@ -22,14 +22,17 @@ from pyscaffold.structure import (
     reify_leaf,
     resolve_leaf,
 )
-from pyscaffold.templates import get_template
+from pyscaffold.templates import get_template, license
+#from pyscaffold import templates as parent_template
 from pyscaffold.update import ConfigUpdater, pyscaffold_version
 
 from . import templates
 
+
 #PYSCAFFOLDEXT_NS = "pyscaffoldext"
 EXTENSION_FILE_NAME = "extension"
 NO_OVERWRITE = no_overwrite()
+SKIP_ON_UPDATE = skip_on_update()
 DOC_REQUIREMENTS = ["pyscaffold"]
 TEST_DEPENDENCIES = (
     #"tox",
@@ -122,11 +125,60 @@ def add_files(struct: Structure, opts: ScaffoldOpts) -> ActionParams:
 
     gitignore_all = (template("gitignore_all"), NO_OVERWRITE)
 
-    files: Structure = {
+    # files: Structure = {
      
+    #     "README.md": (template("readme_md"), NO_OVERWRITE),
+    #     "CONTRIBUTING.rst": (template("contributing"), NO_OVERWRITE),
+    #     "setup.cfg": modify_setupcfg(struct["setup.cfg"], opts),
+    #     "data": {
+    #         ".gitignore": (template("gitignore_data"), NO_OVERWRITE),
+    #         **{
+    #             folder: {".gitignore": gitignore_all}
+    #             for folder in ("external", "preprocessed", "raw")
+    #         },
+    #     },
+    #     "src": {
+    #         opts["package"]: {
+    #             f"{EXTENSION_FILE_NAME}.py": (template("extension"), NO_OVERWRITE)
+    #         }
+    #     },
+    #     "notebooks": {"template.ipynb": (template("template_ipynb"), NO_OVERWRITE)},
+    #     "dags": {"my_dag.py": (template("my_dag_py"), NO_OVERWRITE)},
+    #     "tests": {
+    #         "__init__.py": ("", NO_OVERWRITE),
+    #         "conftest.py": (template("conftest"), NO_OVERWRITE),
+    #         "helpers.py": (template("helpers"), NO_OVERWRITE),
+    #     },
+    # }
+    
+    files: Structure = {
+        # Tools
+        ".gitignore": (get_template("gitignore"), NO_OVERWRITE),
+        #".coveragerc": (get_template("coveragerc"), NO_OVERWRITE),
+        #".readthedocs.yml": (get_template("rtd_cfg"), NO_OVERWRITE),
+        # Project configuration
+        "pyproject.toml": (get_template("pyproject_toml"), NO_OVERWRITE),
+        "setup.py": get_template("setup_py"),
+        "setup.cfg": (get_template("setup_cfg"), NO_OVERWRITE),
+        #"tox.ini": (get_template("tox_ini"), NO_OVERWRITE),
+        # Essential docs
         "README.md": (template("readme_md"), NO_OVERWRITE),
-        "CONTRIBUTING.rst": (template("contributing"), NO_OVERWRITE),
-        "setup.cfg": modify_setupcfg(struct["setup.cfg"], opts),
+        "AUTHORS.rst": (get_template("authors"), NO_OVERWRITE),
+        "LICENSE.txt": (license, NO_OVERWRITE),
+        "CHANGELOG.rst": (get_template("changelog"), NO_OVERWRITE),
+        "CONTRIBUTING.rst": (get_template("contributing"), NO_OVERWRITE),
+        
+        # Code
+        "src": {
+            opts["package"]: {
+                "__init__.py": ("", NO_OVERWRITE),
+                "skeleton.py": (get_template("skeleton"), SKIP_ON_UPDATE),
+                "conftest.py": (template("conftest"), NO_OVERWRITE),
+                "helpers.py": (template("helpers"), NO_OVERWRITE),
+            }
+        },
+        "notebooks": {"template.ipynb": (template("template_ipynb"), NO_OVERWRITE)},
+        "dags": {"my_dag.py": (template("my_dag_py"), NO_OVERWRITE)},
         "data": {
             ".gitignore": (template("gitignore_data"), NO_OVERWRITE),
             **{
@@ -134,21 +186,18 @@ def add_files(struct: Structure, opts: ScaffoldOpts) -> ActionParams:
                 for folder in ("external", "preprocessed", "raw")
             },
         },
-        "src": {
-            opts["package"]: {
-                f"{EXTENSION_FILE_NAME}.py": (template("extension"), NO_OVERWRITE)
-            }
-        },
-        "notebooks": {"template.ipynb": (template("template_ipynb"), NO_OVERWRITE)},
-        "dags": {"my_dag.py": (template("my_dag_py"), NO_OVERWRITE)},
+        # Tests
         "tests": {
             "__init__.py": ("", NO_OVERWRITE),
             "conftest.py": (template("conftest"), NO_OVERWRITE),
             "helpers.py": (template("helpers"), NO_OVERWRITE),
-        },
+            "conftest.py": (get_template("conftest_py"), NO_OVERWRITE),
+            "test_skeleton.py": (get_template("test_skeleton"), SKIP_ON_UPDATE),
+        }
     }
 
-    return merge(struct, files), opts
+    #return merge(struct, files), opts
+    return files, opts
 
 
 def modify_setupcfg(definition: Leaf, opts: ScaffoldOpts) -> ResolvedLeaf:
