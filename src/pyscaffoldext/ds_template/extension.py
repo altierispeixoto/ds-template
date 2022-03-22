@@ -7,9 +7,9 @@ from packaging.version import Version
 from pyscaffold import dependencies as deps
 from pyscaffold.actions import Action, ActionParams, ScaffoldOpts, Structure
 from pyscaffold.extensions import Extension, include
-from pyscaffold.extensions.cirrus import Cirrus
 from pyscaffold.extensions.namespace import Namespace
 from pyscaffold.extensions.no_skeleton import NoSkeleton
+from pyscaffold.extensions.no_tox import NoTox
 from pyscaffold.extensions.pre_commit import PreCommit
 from pyscaffold.operations import add_permissions, no_overwrite, skip_on_update
 from pyscaffold.log import logger
@@ -32,7 +32,7 @@ EXTENSION_FILE_NAME = "extension"
 NO_OVERWRITE = no_overwrite()
 DOC_REQUIREMENTS = ["pyscaffold"]
 TEST_DEPENDENCIES = (
-    "tox",
+    #"tox",
     "pre-commit",
     "setuptools_scm",
     "virtualenv",
@@ -84,14 +84,14 @@ class CustomExtension(Extension):
             self.flag,
             help=self.help_text,
             nargs=0,
-            action=include(NoSkeleton(), Namespace(), PreCommit(), Cirrus(), self),
+            action=include(NoSkeleton(), NoTox(), Namespace(), PreCommit(), self),
         )
         return self
 
     def activate(self, actions: List[Action]) -> List[Action]:
         """Activate extension, see :obj:`~pyscaffold.extension.Extension.activate`."""
         actions = self.register(actions, process_options, after="get_default_options")
-        actions = self.register(actions, add_doc_requirements)
+        #actions = self.register(actions, add_doc_requirements)
         actions = self.register(actions, add_files)
         return actions
 
