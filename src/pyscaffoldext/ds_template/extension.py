@@ -23,7 +23,7 @@ from pyscaffold.structure import (
     resolve_leaf,
 )
 from pyscaffold.templates import get_template, license
-#from pyscaffold import templates as parent_template
+
 from pyscaffold.update import ConfigUpdater, pyscaffold_version
 
 from . import templates

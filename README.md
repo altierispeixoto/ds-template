@@ -46,3 +46,9 @@ For more information about PyScaffold and its extension mechanism, check out htt
 - contribution guidelines: https://pyscaffold.org/en/latest/contributing.html
 - pip: https://pip.pypa.io/en/stable/
 - PyPI: https://pypi.org
+
+[PEP 621 – Storing project metadata in pyproject.toml](https://peps.python.org/pep-0621/)
+[PEP 518 – Specifying Minimum Build System Requirements for Python Projects](https://peps.python.org/pep-0518/)
+[PEP 517 – A build-system independent format for source trees](https://peps.python.org/pep-0517/)
+[The pyproject.toml file](https://python-poetry.org/docs/pyproject/)
+
