@@ -1,8 +1,9 @@
 [tool.poetry]
 name = "ds-template"
 version = "0.1.0"
-description = ""
-authors = ["altieris.peixoto <altieris.peixoto@olist.com>"]
+description = "Template Project - Data Science"
+readme = "README.md"
+authors = ["altieris.peixoto <altieris.peixoto@olist.com>", "Anthony Caliani <anthony.caliani@olist.com>"]
 
 packages = [
     {include = "pyscaffoldext", from = "./src/"}
@@ -12,10 +13,37 @@ packages = [
 python = "^3.8"
 
 [tool.poetry.dev-dependencies]
+pytest = "^7.1.1"
+pytest-cov = "^3.0.0"
+pre-commit = "^2.17.0"
 
 [tool.poetry.plugins."pyscaffold.cli"]
 ds_template = "pyscaffoldext.ds_template.extension:CustomExtension"
 
+[tool.black]
+line-length = 110
+target-version = ["py38"]
+
+[tool.isort]
+profile="black"
+line_length = 110
+multi_line_output = 3
+include_trailing_comma = true
+known_first_party = ["src"]
+force_grid_wrap = 0
+use_parentheses = true
+known_local_folder = ["src", "tests"]
+sections = ["FUTURE", "STDLIB", "THIRDPARTY", "FIRSTPARTY", "LOCALFOLDER"]
+default_section = "THIRDPARTY"
+
+[tool.pytest.ini_options]
+testpaths = "tests"
+addopts = "-vv --tb=native --cov=src"
+
+[tool.coverage.report]
+exclude_lines = ["nocover"]
+show_missing = true
+omit = []
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
