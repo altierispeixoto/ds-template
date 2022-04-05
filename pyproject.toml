@@ -1,16 +1,17 @@
 [tool.poetry]
 name = "ds-template"
-version = "0.1.0"
+version = "1"
 description = "Template Project - Data Science"
 readme = "README.md"
-authors = ["altieris.peixoto <altieris.peixoto@olist.com>", "Anthony Caliani <anthony.caliani@olist.com>"]
+license = "MIT"
+authors = ["altieris.peixoto <github.com/altierispeixoto>", "Anthony Caliani <github.com/avcaliani>"]
 
 packages = [
     {include = "pyscaffoldext", from = "./src/"}
 ]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+PyScaffold = "^4.2.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.1.1"
