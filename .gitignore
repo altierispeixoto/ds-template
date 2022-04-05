@@ -49,5 +49,6 @@ cover/*
 MANIFEST
 
 # Per-project virtualenvs
+.python-version
 .venv*/
 .conda*/

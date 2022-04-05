@@ -1,81 +1,57 @@
-.. image:: https://api.cirrus-ci.com/github/pyscaffold/pyscaffoldext-custom-extension.svg?branch=master
-    :alt: Build Status
-    :target: https://cirrus-ci.com/github/pyscaffold/pyscaffoldext-custom-extension
-.. image:: https://readthedocs.org/projects/pyscaffoldext-custom-extension/badge/?version=latest
-    :alt: ReadTheDocs
-    :target: https://pyscaffoldext-custom-extension.readthedocs.io/
-.. image:: https://img.shields.io/coveralls/github/pyscaffold/pyscaffoldext-custom-extension/master.svg
-    :alt: Coveralls
-    :target: https://coveralls.io/r/pyscaffold/pyscaffoldext-custom-extension
-.. image:: https://img.shields.io/pypi/v/pyscaffoldext-custom-extension.svg
-    :alt: PyPI-Server
-    :target: https://pypi.org/project/pyscaffoldext-custom-extension/
+# 📑 DS Template
 
-|
+## Quick Start
 
-==============================
-ds-template
-==============================
+```bash
+# 👇 Install the template
+pip install ds-template
 
-PyScaffold extension that lets you create your own custom extensions.
+# 🚀 Create a brand new project
+putup --ds-template my_awesome_project
 
+# 📦 Then, go to you project directory and update the dependencies
+make update
+```
 
-Description
-===========
+## 4 Devs
 
-This extension was written to help users interested in developing their own extension for PyScaffold.
-It configures your project so that you can start writing your extension logic and tests right away,
-taking care of all the wiring required to conform to PyScaffold's needs.
+If you are going to use Python Virtual Environment, follow the next steps.
 
-Let's say you want to create an extension named ``notebooks`` that creates a notebooks folder with some template `Jupyter notebook`_.
-After having installed this extension with::
+```bash
+# 👇 PyEnv
+pyenv local 3.10.0
 
-    pip install ds-template
+# 👇 Virtual Env.
+python -m venv .venv \
+  && source .venv/bin/activate \
+  && python -m pip install --upgrade pip \
+  && poetry install
 
-you will be able to just use it with::
+# 👇 Pre Commit
+pre-commit install &&
+    pre-commit autoupdate &&
+    pre-commit run -a -v
+```
 
-    putup --ds-template notebooks
+### How can I install this project while developing it?
 
-This will create a typical PyScaffold project template with some modifications:
+```bash
+pip install dist/ds-template-0.1.0.tar.gz
+```
 
-* the topmost namespace will be ``pyscaffoldext`` to have a unified namespace for PyScaffold extensions,
-* assures that the package (as pip_/PyPI_ sees it) is named ``pyscaffoldext-notebooks`` in ``setup.cfg``,
-* sets the correct ``install_requires`` as well as the ``options.entry_points`` parameters in ``setup.cfg``,
-* automatically activates the extensions ``--no-skeleton``, ``--pre-commit``, ``--cirrus`` and
-  since we want clean-coded, high-quality extensions,
-* creates a ``extension.py`` module holding a class which serves you as a template for your extension,
-* adds basic unit tests checking that the invocation of your extension works and that it complies with our `flake8`_ code guidelines,
-* provides a modified ``README.rst`` indicating that this is a PyScaffold extensions and how to install it.
+## References
 
+For more information about PyScaffold and its extension mechanism, check out https://pyscaffold.org.
 
-.. _pyscaffold-notes:
+- Jupyter notebook: https://jupyter-notebook.readthedocs.io/
+- flake8: https://flake8.pycqa.org/
+- pre-commit: https://pre-commit.com/
+- contribution guidelines: https://pyscaffold.org/en/latest/contributing.html
+- pip: https://pip.pypa.io/en/stable/
+- PyPI: https://pypi.org
 
-Making Changes & Contributing
-=============================
+[PEP 621 – Storing project metadata in pyproject.toml](https://peps.python.org/pep-0621/)
+[PEP 518 – Specifying Minimum Build System Requirements for Python Projects](https://peps.python.org/pep-0518/)
+[PEP 517 – A build-system independent format for source trees](https://peps.python.org/pep-0517/)
+[The pyproject.toml file](https://python-poetry.org/docs/pyproject/)
 
-This project uses `pre-commit`_, please make sure to install it before making any
-changes::
-
-    pip install pre-commit
-    cd pyscaffoldext-custom-extension
-    pre-commit install
-
-It is a good idea to update the hooks to the latest version::
-
-    pre-commit autoupdate
-
-Please also check PyScaffold's `contribution guidelines`_,
-
-
-Note
-====
-
-For more information about PyScaffold and its extension mechanism, check out https://pyscaffold.org/.
-
-
-.. _Jupyter notebook: https://jupyter-notebook.readthedocs.io/
-.. _flake8: https://flake8.pycqa.org/
-.. _pre-commit: https://pre-commit.com/
-.. _contribution guidelines: https://pyscaffold.org/en/latest/contributing.html
-.. _pip: https://pip.pypa.io/en/stable/
-.. _PyPI: https://pypi.org
