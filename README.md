@@ -8,6 +8,9 @@ pip install ds-template
 
 # 🚀 Create a brand new project
 putup --ds-template my_awesome_project
+
+# 📦 Then, go to you project directory and update the dependencies
+make update
 ```
 
 ## 4 Devs
@@ -21,10 +24,10 @@ pyenv local 3.10.0
 # 👇 Virtual Env.
 python -m venv .venv \
   && source .venv/bin/activate \
-  && python -m pip install --upgrade pip
+  && python -m pip install --upgrade pip \
+  && poetry install
 
 # 👇 Pre Commit
-pip install pre-commit
 pre-commit install &&
     pre-commit autoupdate &&
     pre-commit run -a -v
@@ -33,7 +36,7 @@ pre-commit install &&
 ### How can I install this project while developing it?
 
 ```bash
-pip install -e
+pip install dist/ds-template-0.1.0.tar.gz
 ```
 
 ## References
