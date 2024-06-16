@@ -52,3 +52,14 @@ repos:
           - flake8-bugbear  # Includes additional checks
           - flake8-import-order  # Checks the order of imports
           - flake8-annotations  # Checks for missing type annotations
+
+  - repo: https://github.com/kynan/nbstripout
+    rev: 0.7.1
+    hooks:
+      - id: nbstripout
+        files: ".ipynb"
+
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.18.4  # Specify the desired version of Gitleaks
+    hooks:
+      - id: gitleaks
