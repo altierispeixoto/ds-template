@@ -2,7 +2,6 @@ from pathlib import Path
 
 import pytest
 from pyscaffold import cli
-
 from pyscaffoldext.custom_extension.extension import NamespaceError
 
 

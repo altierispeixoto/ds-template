@@ -1,0 +1,21 @@
+[flake8]
+
+ignore = E501, W503
+max-line-length = 120
+exclude =
+    .git,
+    __pycache__,
+    build,
+    dist,
+    migrations,
+    settings.py
+
+# Complexity
+max-complexity = 10
+
+# Documentation
+docstring-convention = numpy
+
+# Plugins
+select = C,E,F,W,B,B950
+extend-ignore = E203, E501

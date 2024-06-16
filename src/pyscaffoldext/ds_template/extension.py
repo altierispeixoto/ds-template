@@ -1,6 +1,6 @@
 """Main logic to create custom extensions"""
-import stat
-from functools import partial, reduce
+
+from functools import partial
 from typing import List
 
 from packaging.version import Version
@@ -11,13 +11,9 @@ from pyscaffold.extensions.namespace import Namespace
 from pyscaffold.extensions.no_skeleton import NoSkeleton
 from pyscaffold.extensions.no_tox import NoTox
 from pyscaffold.extensions.pre_commit import PreCommit
-from pyscaffold.operations import add_permissions, no_overwrite, skip_on_update
-from pyscaffold.log import logger
-from pyscaffold.operations import no_overwrite
-
+from pyscaffold.operations import no_overwrite, skip_on_update
 from pyscaffold.templates import get_template, license
-
-from pyscaffold.update import ConfigUpdater, pyscaffold_version
+from pyscaffold.update import pyscaffold_version
 
 from . import templates
 
@@ -49,10 +45,7 @@ template = partial(get_template, relative_to=templates)
 class NamespaceError(RuntimeError):
     """No additional namespace is allowed"""
 
-    DEFAULT_MESSAGE = (
-        "It's not possible to define a custom namespace "
-        "when using ``--ds-template``."
-    )
+    DEFAULT_MESSAGE = "It's not possible to define a custom namespace " "when using ``--ds-template``."
 
     def __init__(self, message=DEFAULT_MESSAGE, *args, **kwargs):
         super().__init__(message, *args, **kwargs)
@@ -84,7 +77,7 @@ class CustomExtension(Extension):
     def activate(self, actions: List[Action]) -> List[Action]:
         """Activate extension, see :obj:`~pyscaffold.extension.Extension.activate`."""
         actions = self.register(actions, process_options, after="get_default_options")
-        #actions = self.register(actions, add_doc_requirements)
+        # actions = self.register(actions, add_doc_requirements)
         actions = self.register(actions, add_files)
         return actions
 
@@ -114,7 +107,7 @@ def add_files(struct: Structure, opts: ScaffoldOpts) -> ActionParams:
     """Add custom extension files. See :obj:`pyscaffold.actions.Action`"""
 
     gitignore_all = (template("gitignore_all"), NO_OVERWRITE)
-    
+
     files: Structure = {
         # Tools
         ".gitignore": (get_template("gitignore"), NO_OVERWRITE),
@@ -127,29 +120,22 @@ def add_files(struct: Structure, opts: ScaffoldOpts) -> ActionParams:
         "LICENSE.txt": (license, NO_OVERWRITE),
         "CHANGELOG.rst": (get_template("changelog"), NO_OVERWRITE),
         "CONTRIBUTING.rst": (get_template("contributing"), NO_OVERWRITE),
-        
         # Code
-        "src": {
-            opts["package"]: {
-                "__init__.py": ("", NO_OVERWRITE)
-            }
-        },
+        "src": {opts["package"]: {"__init__.py": ("", NO_OVERWRITE)}},
         "notebooks": {"template.ipynb": (template("template_ipynb"), NO_OVERWRITE)},
         "dags": {"my_dag.py": (template("my_dag_py"), NO_OVERWRITE)},
         "data": {
             ".gitignore": (template("gitignore_data"), NO_OVERWRITE),
-            **{
-                folder: {".gitignore": gitignore_all}
-                for folder in ("external", "preprocessed", "raw")
-            },
+            **{folder: {".gitignore": gitignore_all} for folder in ("external", "preprocessed", "raw")},
         },
         # Tests
         "tests": {
             "__init__.py": ("", NO_OVERWRITE),
-        }
+        },
     }
 
     return files, opts
+
 
 def get_requirements() -> List[str]:
     """List of requirements for install_requires"""

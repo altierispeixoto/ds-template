@@ -1,17 +1,18 @@
 [tool.poetry]
 name = "ds-template"
-version = "1"
-description = "Template Project - Data Science"
+version = "0.1.0"  # It's common to start with a version like 0.1.0 for initial development
+description = "A template for Data Science projects."
 readme = "README.md"
 license = "MIT"
-authors = ["altieris.peixoto <github.com/altierispeixoto>", "Anthony Caliani <github.com/avcaliani>"]
+authors = ["Altieris Peixoto <github.com/altierispeixoto>", "Anthony Caliani <github.com/avcaliani>"]  # Proper capitalization of names
 
 packages = [
-    {include = "pyscaffoldext", from = "./src/"}
+    { include = "pyscaffoldext", from = "./src" }  # Removed trailing slash for consistency
 ]
 
 [tool.poetry.dependencies]
-PyScaffold = "^4.2.1"
+PyScaffold = "^4.5.0"
+python = "^3.9"  # Using caret allows for updates within compatible versions, no need to specify upper limit unless necessary
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.1.1"
@@ -23,10 +24,10 @@ ds_template = "pyscaffoldext.ds_template.extension:CustomExtension"
 
 [tool.black]
 line-length = 110
-target-version = ["py38"]
+target-version = ["py310"]  # Updated to reflect the supported Python version
 
 [tool.isort]
-profile="black"
+profile = "black"
 line_length = 110
 multi_line_output = 3
 include_trailing_comma = true
@@ -42,11 +43,10 @@ testpaths = "tests"
 addopts = "-vv --tb=native --cov=src"
 
 [tool.coverage.report]
-exclude_lines = ["nocover"]
+exclude_lines = ["pragma: no cover"]  # More explicit directive for excluding lines from coverage
 show_missing = true
-omit = []
+omit = ["*/__init__.py", "*/config.py"]  # Example of omitting files that typically don't need coverage
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
+requires = ["poetry-core>=1.8.0"]  # Specify a more recent patch version if needed
 build-backend = "poetry.core.masonry.api"
-

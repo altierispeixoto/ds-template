@@ -25,8 +25,8 @@ with DAG('dag_hello_world', default_args=ARGS, catchup=False, schedule_interval=
     )
     """
     Just an reminder...
-    Python Operators should be used for simple actions, 
-    it's not advisable to use them for heavy processes. 
+    Python Operators should be used for simple actions,
+    it's not advisable to use them for heavy processes.
     """
     say_helo = PythonOperator(
         task_id='app-processing',
