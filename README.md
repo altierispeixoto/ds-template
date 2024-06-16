@@ -21,7 +21,6 @@ conda activate ./.env
 conda install conda-forge::poetry==1.8.3
 
 poetry install
-
 # 👇 Pre Commit
 pre-commit install &&
     pre-commit autoupdate &&
@@ -31,5 +30,6 @@ pre-commit install &&
 ### How can I install this project while developing it?
 
 ```bash
+poetry build
 pip install dist/ds-template-0.1.0.tar.gz
 ```

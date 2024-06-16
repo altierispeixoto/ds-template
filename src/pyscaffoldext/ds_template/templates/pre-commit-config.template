@@ -1,0 +1,65 @@
+# The following section configures various pre-commit hooks to ensure code quality and consistency.
+
+# Define repositories and their respective hooks
+repos:
+  # pre-commit-hooks repository contains a collection of git hooks for pre-commit
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0  # The version of the pre-commit-hooks to use
+    hooks:
+      - id: trailing-whitespace  # Removes trailing whitespace
+      - id: check-added-large-files  # Prevents adding large files to the git repository
+      - id: check-ast  # Validates Python abstract syntax trees
+      - id: check-json  # Checks JSON file syntax
+      - id: check-merge-conflict  # Checks for unresolved merge conflicts
+      - id: check-xml  # Checks XML file syntax
+      - id: check-yaml  # Checks YAML file syntax
+      - id: debug-statements  # Checks for debug statements
+      - id: end-of-file-fixer  # Ensures files end with a newline
+      - id: mixed-line-ending
+        args: ['--fix=auto']  # Automatically fixes line endings (can be set to 'lf' or 'crlf')
+
+  # autoflake removes unused imports and unused variables
+  - repo: https://github.com/myint/autoflake.git
+    rev: v2.3.1  # The version of autoflake to use
+    hooks:
+      - id: autoflake
+        args: [
+          --in-place,  # Makes changes to files in place
+          --remove-all-unused-imports,  # Removes all unused imports
+          --remove-unused-variables,  # Removes unused variables
+        ]
+
+  # isort sorts imports alphabetically and automatically separated into sections
+  - repo: http://github.com/pycqa/isort
+    rev: 5.13.2  # The version of isort to use
+    hooks:
+      - id: isort
+
+  # black is an uncompromising Python code formatter
+  - repo: https://github.com/psf/black
+    rev: 24.4.2  # The version of black to use
+    hooks:
+      - id: black
+        language_version: python3  # Specifies the Python version for black to target
+
+  # flake8 checks for Python style guide enforcement
+  - repo: https://github.com/PyCQA/flake8
+    rev: 7.1.0  # The version of flake8 to use
+    hooks:
+      - id: flake8
+        args: [--config=.flake8]  # Specify custom configuration file for flake8
+        additional_dependencies:
+          - flake8-bugbear  # Includes additional checks
+          - flake8-import-order  # Checks the order of imports
+          - flake8-annotations  # Checks for missing type annotations
+
+  - repo: https://github.com/kynan/nbstripout
+    rev: 0.7.1
+    hooks:
+      - id: nbstripout
+        files: ".ipynb"
+
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.18.4  # Specify the desired version of Gitleaks
+    hooks:
+      - id: gitleaks

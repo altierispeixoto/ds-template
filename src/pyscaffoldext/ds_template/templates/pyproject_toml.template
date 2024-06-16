@@ -1,16 +1,16 @@
 [tool.poetry]
 name = "${name}"
 version = "0.1.0"
-description = "Template Project - Data Science"
+description = "My Data Science Project"
 readme = "README.md"
-authors = ["altieris.peixoto <altieris.peixoto@olist.com>", "Anthony Caliani <anthony.caliani@olist.com>"]
-
-packages = [
-    {include = "${name}", from = "./src/"}
-]
+authors = ["xxx.xxxx <xxx.xxx@xxxx.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+PyScaffold = "^4.5.0"
+python = "^3.9"  # Using caret allows for updates within compatible versions, no need to specify upper limit unless necessary
+hydra-core = "^1.3.2"
+dvc = "^3.51.2"
+
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.1.1"
@@ -19,10 +19,10 @@ pre-commit = "^2.17.0"
 
 [tool.black]
 line-length = 110
-target-version = ["py38"]
+target-version = ["py310"]  # Updated to reflect the supported Python version
 
 [tool.isort]
-profile="black"
+profile = "black"
 line_length = 110
 multi_line_output = 3
 include_trailing_comma = true
@@ -38,10 +38,10 @@ testpaths = "tests"
 addopts = "-vv --tb=native --cov=src"
 
 [tool.coverage.report]
-exclude_lines = ["nocover"]
+exclude_lines = ["pragma: no cover"]  # More explicit directive for excluding lines from coverage
 show_missing = true
-omit = []
+omit = ["*/__init__.py", "*/config.py"]  # Example of omitting files that typically don't need coverage
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
+requires = ["poetry-core>=1.8.0"]  # Specify a more recent patch version if needed
 build-backend = "poetry.core.masonry.api"

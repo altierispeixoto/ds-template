@@ -2,6 +2,7 @@
 *
 # Except this file and .gitignore in sub directories
 !.gitignore
+!staging
 !raw
-!external
-!preprocessed
+!model_features
+!processed

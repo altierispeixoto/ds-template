@@ -7,10 +7,7 @@ from packaging.version import Version
 from pyscaffold import dependencies as deps
 from pyscaffold.actions import Action, ActionParams, ScaffoldOpts, Structure
 from pyscaffold.extensions import Extension, include
-from pyscaffold.extensions.namespace import Namespace
 from pyscaffold.extensions.no_skeleton import NoSkeleton
-from pyscaffold.extensions.no_tox import NoTox
-from pyscaffold.extensions.pre_commit import PreCommit
 from pyscaffold.operations import no_overwrite, skip_on_update
 from pyscaffold.templates import get_template, license
 from pyscaffold.update import pyscaffold_version
@@ -23,12 +20,8 @@ SKIP_ON_UPDATE = skip_on_update()
 DOC_REQUIREMENTS = ["pyscaffold"]
 TEST_DEPENDENCIES = (
     "pre-commit",
-    "setuptools_scm",
-    "virtualenv",
-    "configupdater",
     "pytest",
     "pytest-cov",
-    "pytest-xdist",
 )
 
 INVALID_PROJECT_NAME = (
@@ -70,14 +63,13 @@ class CustomExtension(Extension):
             self.flag,
             help=self.help_text,
             nargs=0,
-            action=include(NoSkeleton(), NoTox(), Namespace(), PreCommit(), self),
+            action=include(NoSkeleton(), self),  # NoTox() Namespace(), PreCommit()
         )
         return self
 
     def activate(self, actions: List[Action]) -> List[Action]:
         """Activate extension, see :obj:`~pyscaffold.extension.Extension.activate`."""
         actions = self.register(actions, process_options, after="get_default_options")
-        # actions = self.register(actions, add_doc_requirements)
         actions = self.register(actions, add_files)
         return actions
 
@@ -111,9 +103,10 @@ def add_files(struct: Structure, opts: ScaffoldOpts) -> ActionParams:
     files: Structure = {
         # Tools
         ".gitignore": (get_template("gitignore"), NO_OVERWRITE),
+        ".flake8": (template("flake8"), NO_OVERWRITE),
+        ".env-template": (template("env"), NO_OVERWRITE),
         # Project configuration
         "pyproject.toml": (template("pyproject_toml"), NO_OVERWRITE),
-        "setup.py": get_template("setup_py"),
         # Essential docs
         "README.md": (template("readme_md"), NO_OVERWRITE),
         "AUTHORS.rst": (get_template("authors"), NO_OVERWRITE),
@@ -123,15 +116,18 @@ def add_files(struct: Structure, opts: ScaffoldOpts) -> ActionParams:
         # Code
         "src": {opts["package"]: {"__init__.py": ("", NO_OVERWRITE)}},
         "notebooks": {"template.ipynb": (template("template_ipynb"), NO_OVERWRITE)},
-        "dags": {"my_dag.py": (template("my_dag_py"), NO_OVERWRITE)},
         "data": {
             ".gitignore": (template("gitignore_data"), NO_OVERWRITE),
-            **{folder: {".gitignore": gitignore_all} for folder in ("external", "preprocessed", "raw")},
+            **{
+                folder: {".gitignore": gitignore_all}
+                for folder in ("staging", "raw", "model_features", "processed")
+            },
         },
         # Tests
         "tests": {
             "__init__.py": ("", NO_OVERWRITE),
         },
+        ".pre-commit-config.yaml": (template("pre-commit-config"), NO_OVERWRITE),
     }
 
     return files, opts
