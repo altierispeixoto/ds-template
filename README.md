@@ -1,35 +1,63 @@
-# 📑 Data Science Template
+# 📑 Data Science Template Generator
 
 ## Quick Start
 
 ```bash
 # 👇 Install the template
-pip install ds-template
+pip install git+ssh://git@github.com/altierispeixoto/ds-template.git
 
 # 🚀 Create a brand new project
 putup --ds-template my_awesome_project
 
 ```
 
-## How to use
-
-```bash
-
-conda create --prefix .venv python=3.10
-conda activate ./.env
-
-conda install conda-forge::poetry==1.8.3
-
-poetry install
-# 👇 Pre Commit
-pre-commit install &&
-    pre-commit autoupdate &&
-    pre-commit run -a -v
+This will create a new directory with the following structure:
+```
+.
+├── .dockerignore
+├── .env-template
+├── .git
+├── .gitignore
+├── .pre-commit-config.yaml
+├── CHANGELOG.rst
+├── CONTRIBUTING.rst
+├── Dockerfile
+├── README.md
+├── data
+│   ├── .gitignore
+│   ├── model_features
+│   ├── processed
+│   ├── raw
+│   └── staging
+├── justfile
+├── notebooks
+│   └── template.ipynb
+├── pyproject.toml
+├── ruff.toml
+├── sql
+│   └── .sqlfluff
+├── src
+│   └── my_awesome_project
+└── tests
+    ├── __init__.py
+    └── test_my_module.py
 ```
 
-### How can I install this project while developing it?
+## The project created uses:
+[uv](https://github.com/astral-sh/uv) to manage python packages.  
+[Docker](https://www.docker.com/) is used to containerize the application.  
+[DVC](https://dvc.org/) is used to version the data and models.  
+[Ruff](https://beta.ruff.rs/docs/configuration/) is used to lint the code.  
+[Pre-commit](https://pre-commit.com/) is used to run all pre-commit hooks, linting and formatting, cleaning notebooks and more.   
+
+
+## To add the new project to git basically refer the remote repository and push the code
 
 ```bash
-poetry build
-pip install dist/ds-template-0.1.0.tar.gz
+git init
+git add .
+git commit -m "Initial commit"
+git branch -M main
+git remote add origin <your-repository-url>
+
 ```

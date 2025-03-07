@@ -1,0 +1,32 @@
+#------------------------------------------------------------------------------#
+# Setup
+#------------------------------------------------------------------------------#
+[sqlfluff]
+dialect = snowflake
+templater = dbt
+exclude_rules = L034
+
+[sqlfluff:templater:jinja]
+apply_dbt_builtins = True
+
+[sqlfluff:templater:dbt:context]
+DBT_ENVIRONMENT = QA
+
+#------------------------------------------------------------------------------#
+# Custom Settings
+#------------------------------------------------------------------------------#
+[sqlfluff:indentation]
+indented_joins = False
+indented_ctes = False
+indented_using_on = True
+indented_on_contents = False
+template_blocks_indent = True
+
+[sqlfluff:rules]
+tab_space_size = 4
+max_line_length = 120
+indent_unit = space
+comma_style = trailing
+allow_scalar = True
+single_table_references = consistent
+unquoted_identifiers_policy = aliases

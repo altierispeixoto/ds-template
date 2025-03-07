@@ -3,51 +3,38 @@
 
 ## Quick Summary
 
+Decribe here the summary of the project.
 
 ## Configuration
 
-**1.0 Using conda env**
+This project uses [uv](https://github.com/astral-sh/uv) to manage python packages.  
+[Docker](https://www.docker.com/) is used to containerize the application.  
+[DVC](https://dvc.org/) is used to version the data and models.
+[Ruff](https://beta.ruff.rs/docs/configuration/) is used to lint the code.  
+[Pre-commit](https://pre-commit.com/) is used to run all pre-commit hooks, linting and formatting, cleaning notebooks and more.  
 
-There are many ways to create virtual environment for python.
-This project uses [conda](https://www.anaconda.com/products/distribution) for virtual environment management.
+## How to use
 
-``bash
+```bash
+# 👇 Create a virtual environment
+uv venv
 
-conda create --prefix .venv python=3.10
-conda activate ./venv
-conda install -c conda-forge poetry==1.8.3
-poetry install
+# 👇 Activate the virtual environment
+source venv/bin/activate
 
-## pre-commit
+# 👇 Install the project
+uv sync 
+
+# 👇 Pre Commit
 pre-commit install &&
     pre-commit autoupdate &&
     pre-commit run -a -v
-
-poetry build
-
 ```
 
 **1.1 Data Versioning with DVC**
 
 
 All models and data used in this project are versioned using [DVC website](https://dvc.org/doc/start/data-management/data-pipelines) | [DVC repository](https://github.com/iterative/dvc).
-Please follow the steps bellow concerning the configuration about the remote repository access.
-
-```bash
-# you SHOULD do this at least once to set up your aws credentials locally
-dvc remote add prod s3://xxxx/release/models/xxx/prod/
-dvc remote modify prod credentialpath ~/.aws/credentials --local
-
-# Retrieving data and model from remote repository.
-dvc pull -r prod
-
-# Pushing data and model to remote repository.
-git add . # adding dvc.lock , dvc.yaml and all code files.
-git commit -m "new model"
-git push
-dvc push -r prod
-```
-
 More info [DVC - Data Version Control](https://parrotanalytics.atlassian.net/wiki/spaces/DAT/pages/2373582850/DVC+-+Data+Version+Control)
 
 
@@ -147,4 +134,4 @@ More info [12factor - build release run](https://12factor.net/build-release-run)
   - John Doe <john.doe@company.com>
 
 * Other community or team contact
-  - Foo Bar <foo.bar@company.com>
+  - Jane Doe <jane.doe@company.com>

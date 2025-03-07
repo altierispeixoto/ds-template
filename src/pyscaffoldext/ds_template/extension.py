@@ -103,18 +103,24 @@ def add_files(struct: Structure, opts: ScaffoldOpts) -> ActionParams:
     files: Structure = {
         # Tools
         ".gitignore": (get_template("gitignore"), NO_OVERWRITE),
-        ".flake8": (template("flake8"), NO_OVERWRITE),
+        "ruff.toml": (template("ruff_toml"), NO_OVERWRITE),
         ".env-template": (template("env"), NO_OVERWRITE),
+        "Dockerfile": (template("dockerfile"), NO_OVERWRITE),
+        ".dockerignore": (template("dockerignore"), NO_OVERWRITE),
+        "justfile": (template("justfile"), NO_OVERWRITE),
         # Project configuration
         "pyproject.toml": (template("pyproject_toml"), NO_OVERWRITE),
         # Essential docs
         "README.md": (template("readme_md"), NO_OVERWRITE),
-        "AUTHORS.rst": (get_template("authors"), NO_OVERWRITE),
-        "LICENSE.txt": (license, NO_OVERWRITE),
+        #"AUTHORS.rst": (get_template("authors"), NO_OVERWRITE),
+        # "LICENSE.txt": (license, NO_OVERWRITE),
         "CHANGELOG.rst": (get_template("changelog"), NO_OVERWRITE),
-        "CONTRIBUTING.rst": (get_template("contributing"), NO_OVERWRITE),
+        "CONTRIBUTING.rst": (template("contributing"), NO_OVERWRITE),
         # Code
         "src": {opts["package"]: {"__init__.py": ("", NO_OVERWRITE)}},
+        "sql": {
+            ".sqlfluff": (template("sqlfluff"), NO_OVERWRITE),
+        },
         "notebooks": {"template.ipynb": (template("template_ipynb"), NO_OVERWRITE)},
         "data": {
             ".gitignore": (template("gitignore_data"), NO_OVERWRITE),
@@ -126,6 +132,7 @@ def add_files(struct: Structure, opts: ScaffoldOpts) -> ActionParams:
         # Tests
         "tests": {
             "__init__.py": ("", NO_OVERWRITE),
+             "test_my_module.py": (template("pytest"), NO_OVERWRITE),
         },
         ".pre-commit-config.yaml": (template("pre-commit-config"), NO_OVERWRITE),
     }
