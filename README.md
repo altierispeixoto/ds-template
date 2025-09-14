@@ -22,13 +22,13 @@ A professional Data Science project template generator that sets up a standardiz
 
 ### Prerequisites
 
-- Python 3.8 or higher
-- pip package manager
+- Python 3.10 or higher
+- uv package manager (`pip install uv`)
 
 ### Installation
 
 ```bash
-pip install git+ssh://git@github.com/altierispeixoto/ds-template.git
+uv pip install git+ssh://git@github.com/altierispeixoto/ds-template.git
 ```
 
 ### Create a New Project
