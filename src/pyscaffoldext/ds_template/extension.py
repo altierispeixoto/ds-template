@@ -9,7 +9,7 @@ from pyscaffold.actions import Action, ActionParams, ScaffoldOpts, Structure
 from pyscaffold.extensions import Extension, include
 from pyscaffold.extensions.no_skeleton import NoSkeleton
 from pyscaffold.operations import no_overwrite, skip_on_update
-from pyscaffold.templates import get_template, license
+from pyscaffold.templates import get_template
 from pyscaffold.update import pyscaffold_version
 
 from . import templates
