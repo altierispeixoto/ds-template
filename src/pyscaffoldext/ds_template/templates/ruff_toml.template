@@ -1,14 +1,32 @@
-# Enable all rules by default
-lint.select = ["ALL"]
+# Enable Ruff's default rules plus additional ones
+lint.select = [
+    "ALL",            # All rules
+    "ASYNC",          # Additional async/await checks
+    "B",             # Bugbear: detecting potential bugs
+    "C4",            # Flake8 comprehensions
+    "DTZ",           # Datetime checks
+    "EM",            # Error messages
+    "ERA",           # Commented-out code detection
+    "INT",           # gettext functions
+    "NPY",           # NumPy-specific rules
+    "PD",            # Pandas-specific rules
+    "PT",            # pytest-specific rules
+    "RUF",           # Ruff-specific rules
+    "S",             # Security checks
+    "SIM",           # Code simplification
+    "SLOT",          # __slots__ checks
+]
 
 # Ignore specific rules
 lint.ignore = [
-    "E501",  # Line too long (handled by formatter)
-    "D100",  # Missing docstring in public module
-    "D104",  # Missing docstring in public package
-    "COM812",
-    "ISC001",
-    "PLR2004"
+    "D100",          # Missing docstring in public module
+    "D104",          # Missing docstring in public package
+    "D203",          # One blank line before class docstring
+    "D212",          # Multi-line docstring should start at the first line
+    "E501",          # Line too long (handled by formatter)
+    "PLR0913",       # Too many arguments to function call
+    "PD901",         # DataFrame variable name should be df
+    "S101",          # Use of assert detected (pytest needs this)
 ]
 
 # Allow autofix for all enabled rules (when `--fix` is provided)
@@ -65,7 +83,9 @@ convention = "google"
 
 [lint.isort]
 force-single-line = true
-known-first-party = ["investigator_assistant"]
+combine-as-imports = true
+known-first-party = ["${name}"]
+section-order = ["future", "standard-library", "third-party", "first-party", "local-folder"]
 
 [lint.flake8-bugbear]
 extend-immutable-calls = ["fastapi.Depends", "fastapi.Query", "fastapi.Body"]

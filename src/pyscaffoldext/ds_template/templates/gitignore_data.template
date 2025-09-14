@@ -1,8 +1,47 @@
-# Ignore everything in this directory
+# Ignore all files in this directory by default
 *
-# Except this file and .gitignore in sub directories
-!.gitignore
-!staging
-!raw
-!model_features
-!processed
+
+# Keep directories but ignore their contents
+# Data directories
+!raw/
+raw/*
+!raw/.gitkeep
+
+!interim/
+interim/*
+!interim/.gitkeep
+
+!processed/
+processed/*
+!processed/.gitkeep
+
+!external/
+external/*
+!external/.gitkeep
+
+# Model directories
+!models/
+models/*
+!models/.gitkeep
+!models/README.md
+
+# Features
+!features/
+features/*
+!features/.gitkeep
+
+# DVC files
+!*.dvc
+!.dvcignore
+!dvc.yaml
+!dvc.lock
+
+# Experiment tracking
+!mlruns/
+mlruns/*
+!mlruns/.gitkeep
+
+# Documentation about data
+!README.md
+!DATACARD.md
+!CHANGELOG.md

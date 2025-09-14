@@ -1,9 +1,62 @@
-"""This module contains tests for my_module."""
+"""Example test module demonstrating testing best practices."""
 
-from math import fsum
+import pytest
+from typing import List, Tuple
+import numpy as np
+import pandas as pd
 
 
-def test_sample() -> None:
-    """This function tests if 1 equals 1. It's a sample test function."""
-    result = fsum[1, 1]
-    assert result == 2, f"Test Failed: {result} is not equal to 2"
+@pytest.fixture
+def sample_data() -> Tuple[pd.DataFrame, pd.Series]:
+    """Create sample data for testing.
+    
+    Returns:
+        Tuple containing features DataFrame and target Series.
+    """
+    np.random.seed(42)
+    n_samples = 100
+    
+    # Generate synthetic data
+    X = pd.DataFrame({
+        'feature1': np.random.normal(0, 1, n_samples),
+        'feature2': np.random.uniform(-1, 1, n_samples)
+    })
+    y = pd.Series(np.random.binomial(1, 0.5, n_samples), name='target')
+    
+    return X, y
+
+
+def test_data_preparation(sample_data: Tuple[pd.DataFrame, pd.Series]) -> None:
+    """Test data preparation functionality.
+    
+    Args:
+        sample_data: Fixture providing test data.
+    """
+    X, y = sample_data
+    
+    # Test data shape
+    assert X.shape[0] == y.shape[0], "Features and target must have same number of samples"
+    assert X.shape[1] == 2, "Expected 2 features"
+    
+    # Test data types
+    assert X.dtypes.all() == np.float64, "Features should be float64"
+    assert y.dtype == np.int64, "Target should be int64"
+    
+    # Test for missing values
+    assert not X.isna().any().any(), "Features should not contain missing values"
+    assert not y.isna().any(), "Target should not contain missing values"
+
+
+@pytest.mark.parametrize("threshold", [-0.5, 0.0, 0.5])
+def test_feature_threshold(sample_data: Tuple[pd.DataFrame, pd.Series], threshold: float) -> None:
+    """Test feature thresholding with different values.
+    
+    Args:
+        sample_data: Fixture providing test data.
+        threshold: Value to test for thresholding.
+    """
+    X, _ = sample_data
+    feature1_above_threshold = X['feature1'] > threshold
+    
+    assert isinstance(feature1_above_threshold, pd.Series), "Result should be a pandas Series"
+    assert feature1_above_threshold.dtype == bool, "Result should be boolean"

@@ -1,22 +1,152 @@
 {
  "cells": [
   {
-   "cell_type": "code",
-   "execution_count": null,
+   "cell_type": "markdown",
    "metadata": {},
-   "outputs": [],
    "source": [
-    "%load_ext autoreload\n",
-    "%autoreload 2"
+    "# Notebook Title\n",
+    "\n",
+    "**Author:** [Your Name]  \n",
+    "**Date:** [Date]  \n",
+    "**Purpose:** Brief description of the notebook's purpose\n",
+    "\n",
+    "## Table of Contents\n",
+    "1. [Setup](#Setup)\n",
+    "2. [Data Loading](#Data-Loading)\n",
+    "3. [Exploratory Data Analysis](#EDA)\n",
+    "4. [Analysis](#Analysis)\n",
+    "5. [Results](#Results)\n",
+    "6. [Conclusions](#Conclusions)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Setup\n",
+    "\n",
+    "Import required libraries and set up the environment"
    ]
   },
   {
    "cell_type": "code",
    "execution_count": null,
-   "metadata": {},
+   "metadata": {
+    "tags": [
+     "setup"
+    ]
+   },
    "outputs": [],
    "source": [
-    "import ${package}  # noqa: F401"
+    "# Standard imports\n",
+    "import numpy as np\n",
+    "import pandas as pd\n",
+    "import matplotlib.pyplot as plt\n",
+    "import seaborn as sns\n",
+    "\n",
+    "# Project imports\n",
+    "import ${package}  # noqa: F401\n",
+    "\n",
+    "# Notebook settings\n",
+    "%load_ext autoreload\n",
+    "%autoreload 2\n",
+    "\n",
+    "# Display settings\n",
+    "%matplotlib inline\n",
+    "plt.style.use('seaborn')\n",
+    "sns.set_theme()\n",
+    "pd.set_option('display.max_columns', None)\n",
+    "\n",
+    "# Optional: for reproducibility\n",
+    "np.random.seed(42)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Data Loading\n",
+    "\n",
+    "Load and prepare the data for analysis"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "tags": [
+     "data-loading"
+    ]
+   },
+   "outputs": [],
+   "source": [
+    "# Load your data here\n",
+    "# Example:\n",
+    "# df = pd.read_csv('path/to/data.csv')"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Exploratory Data Analysis"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "tags": [
+     "eda"
+    ]
+   },
+   "outputs": [],
+   "source": [
+    "# Basic data exploration\n",
+    "# df.info()\n",
+    "# df.describe()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Analysis\n",
+    "\n",
+    "Main analysis section"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "tags": [
+     "analysis"
+    ]
+   },
+   "outputs": [],
+   "source": [
+    "# Your analysis code here"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Results\n",
+    "\n",
+    "Summary of key findings"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Conclusions\n",
+    "\n",
+    "- Key conclusion 1\n",
+    "- Key conclusion 2\n",
+    "- Next steps"
    ]
   }
  ],
@@ -36,18 +166,22 @@
    "name": "python",
    "nbconvert_exporter": "python",
    "pygments_lexer": "ipython3",
-   "version": "3.7.3"
+   "version": "3.12"
   },
-  "pycharm": {
-   "stem_cell": {
-    "cell_type": "raw",
-    "metadata": {
-     "collapsed": false
-    },
-    "source": []
-   }
+  "toc": {
+   "base_numbering": 1,
+   "nav_menu": {},
+   "number_sections": true,
+   "sideBar": true,
+   "skip_h1_title": false,
+   "title_cell": "Table of Contents",
+   "title_sidebar": "Contents",
+   "toc_cell": false,
+   "toc_position": {},
+   "toc_section_display": true,
+   "toc_window_display": true
   }
  },
  "nbformat": 4,
- "nbformat_minor": 2
+ "nbformat_minor": 4
 }

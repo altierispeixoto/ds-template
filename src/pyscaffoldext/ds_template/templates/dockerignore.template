@@ -1,23 +1,70 @@
-**/.DS_Store
-**/.idea
-__pycache__
-*.pyc
-*.pyo
-*.pyd
+# Version control
+.git
+.gitignore
+.gitattributes
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
 .Python
-.env
-pip-log.txt
-pip-delete-this-directory.txt
-.tox
+.env*
+.venv
+venv/
+ENV/
+env.bak/
+venv.bak/
+uv.lock
+
+# Testing
+.tox/
+.pytest_cache/
 .coverage
 .coverage.*
-.cache
-nosetests.xml
+htmlcov/
+.hypothesis/
 coverage.xml
 *.cover
+pytest-report.xml
+nosetests.xml
+
+# Development
 *.log
-.git
-.mypy_cache
-.pytest_cache
-.hypothesis$
-.vscode
+*.swp
+*.swo
+.DS_Store
+.idea/
+.vscode/
+.vs/
+*.sublime-*
+.mypy_cache/
+.ruff_cache/
+
+# Build and distribution
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Project specific
+data/
+logs/
+*.db
+*.sqlite3
+.dvc/
+tmp/
+temp/
+
+# Documentation
+docs/_build/
+site/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb
+
+# Local development configuration
+*.local
+.env.local
+config.local.*
