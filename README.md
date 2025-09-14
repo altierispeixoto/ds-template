@@ -99,6 +99,53 @@ The generated project follows a well-organized structure:
    git push -u origin main
    ```
 
+## 🧹 Code Quality Tools
+
+### Pre-commit Hooks
+
+The template comes with pre-configured git hooks using pre-commit. To set up:
+
+1. Install pre-commit in your environment:
+   ```bash
+   uv pip install pre-commit
+   ```
+
+2. Install the git hooks:
+   ```bash
+   pre-commit install
+   ```
+
+Now, pre-commit will automatically run on every commit. You can also run it manually:
+```bash
+pre-commit run --all-files
+```
+
+### Ruff (Linter & Formatter)
+
+Ruff is configured and ready to use in your project. To run:
+
+1. Check code style:
+   ```bash
+   ruff check .
+   ```
+
+2. Auto-fix issues:
+   ```bash
+   ruff check --fix .
+   ```
+
+3. Format code:
+   ```bash
+   ruff format .
+   ```
+
+The configuration for Ruff is in `ruff.toml`. Key features enabled:
+- Code formatting (replacement for black)
+- Import sorting (replacement for isort)
+- Code linting (replacement for flake8)
+- Type checking
+- Best practices enforcement
+
 3. Set up your environment:
    ```bash
    # Copy environment template
