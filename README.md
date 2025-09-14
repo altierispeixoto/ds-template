@@ -1,4 +1,4 @@
-# Data Science Template Generator �
+# Data Science Template Generator 
 
 [![License](https://img.shields.io/github/license/altierispeixoto/ds-template)](LICENSE)
 [![Python Version](https://img.shields.io/badge/python-3.8%2B-blue)](pyproject.toml)
